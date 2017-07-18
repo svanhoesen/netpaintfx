@@ -7,16 +7,18 @@
 
 package model;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
-import javafx.scene.canvas.GraphicsContext;
-
-
-//import view.NetPaintFXGUI;
-
-import javafx.scene.paint.Color;
 
 public class Line extends PaintObject<Object>{
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9082971076005623150L;
+
 
 	/**
 	 * Makes a new line using Shape by passing shape needed information.
@@ -35,9 +37,9 @@ public class Line extends PaintObject<Object>{
 	 * @param g2 Takes in a GraphicContext this is what draws on the canvas.
 	 */
 	@Override
-	public void draw(GraphicsContext g2) {
-		g2.setStroke(getColor());
-		g2.strokeLine(getInitX(),getInitY(), getEndX(),getEndY());
+	public void draw(Graphics g2) {
+		g2.setColor(getColor());
+		g2.drawLine(getIPoint().x, getIPoint().y, getEPoint().x, getEPoint().y);
 		
 	}
 

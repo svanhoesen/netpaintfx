@@ -7,15 +7,22 @@
 
 package model;
 
-import javafx.scene.image.Image;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
 import java.io.IOException;
 
-import javafx.scene.canvas.GraphicsContext;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 public class Picture extends PaintObject<Object> {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1285179179933640203L;
+	private ImageIcon img;
 
 	/**
 	 * Creates a new Image by passing PaintObject needed information and
@@ -24,9 +31,10 @@ public class Picture extends PaintObject<Object> {
 	 * @param initX,initY Takes in initial position of X and Y.
 	 * @throws IOException 
 	 */
-	public Picture(Point initX, Point initY, String s) {
+	public Picture(Point initX, Point initY, String s) throws IOException {
 		super(null, initX, initY, s);
-		setPicture("file:./NetPaintFX/images/" + s);
+		//setPicture("File:../NetPaintFX/images/" + s);
+		 img = new ImageIcon(ImageIO.read(new File(s)));
 	}
 
 	/**
@@ -36,9 +44,10 @@ public class Picture extends PaintObject<Object> {
 	 *            Takes in a GraphicContext this is what draws on the canvas.
 	 */
 	@Override
-	public void draw(GraphicsContext g2) {
-		Image pic = new Image(getPicture());
-		g2.drawImage(pic, (double)Math.min(getInitX(), getEndX()), (double)Math.min(getInitY(), getEndY()), (double)getWidth(), (double)getHeight());
+	public void draw(Graphics g2) {
+		g2.setColor(getColor());
+		Image imgPaint = img.getImage();
+		g2.drawImage(imgPaint,Math.min(getIPoint().x, getEPoint().x), Math.min(getIPoint().y, getEPoint().y), getWidth(), getHeight(), null);
 
 	}
 
