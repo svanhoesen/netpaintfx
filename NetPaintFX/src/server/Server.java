@@ -89,7 +89,7 @@ public class Server implements Runnable {
 		public void run() {
 			try {
 	
-				writePaintListToClient();
+				writeListOfPaintToClient();
 				while (true) {
 					try {
 						swatches = (listOfPaint) inStream.readObject();
@@ -98,7 +98,7 @@ public class Server implements Runnable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					writePaintListToClient();
+					writeListOfPaintToClient();
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -106,7 +106,7 @@ public class Server implements Runnable {
 
 		}
 		
-		private void writePaintListToClient(){
+		private void writeListOfPaintToClient(){
 			for(ObjectOutputStream clientOutStream: clients){
 				try {
 					clientOutStream.reset();
